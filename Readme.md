@@ -14,8 +14,16 @@ After installing all the above prerequisite start with the following steps:
 4) Start ui by running `make start_ui`
 
 
+
 Note:
 -----
+
+- Inorder to ssh into the zookeeper, run `make ssh_zookeeper`, and then `sudo su - zookeeper`, 
+  there you will find all the  binaries in `/opt/zookeeper/bin` folder.
+
+- Inorder to ssh into specific broker, run `make ssh_broker/<broker_number_starting_from_1>`, and then `sudo su - kafka`, 
+  there you will find all the  binaries in `/opt/kafka/bin` folder.
+
 - If you want to change the ips due to some reason,please change it in 
     `common.env` as well as in `Makefile`
         `ZOOKEEPER_IP`
