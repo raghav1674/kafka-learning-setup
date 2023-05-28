@@ -8,7 +8,7 @@ Prerequisites:
 After installing all the above prerequisite start with the following steps:
 ===========================================================================
 
-1) Run `make start_all` and if you want to change the broker count Run `NUM_BROKERS=2 start_all`
+1) Run `make start_all` and if you want to change the broker count Run `NUM_BROKERS=2 make start_all`
 2) To Describe the cluster details, Run `make describe_cluster`
 3) To Destroy the cluster, Run `make destroy_all`
 4) Start ui by running `make start_ui`
