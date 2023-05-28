@@ -15,7 +15,7 @@ start_zookeeper: install_prerequisite
 start_broker/%: install_prerequisite
 	@source common.env && BROKER_ID=$(@F) vagrant up --provision broker$(@F)
 start_brokers: 
-	@for i in `seq 0 ${NUM_BROKERS}`; do make start_broker/$$i; done;
+	@for i in `seq 1 ${NUM_BROKERS}`; do make start_broker/$$i; done;
 start_all: start_zookeeper start_brokers
 
 # stop related targets
