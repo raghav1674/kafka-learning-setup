@@ -20,21 +20,21 @@ start_all: start_zookeeper start_brokers
 
 # stop related targets
 stop_zookeeper: 
-	@vagrant halt zk --force -g
+	@vagrant halt zk 
 stop_brokers: 
 	@for i in `seq 1 ${NUM_BROKERS}`; do BROKER_ID=$$i vagrant halt broker$$i --force -g; done;
 stop_all: stop_brokers stop_zookeeper
 
 # pause/suspend related targets
 suspend_zookeeper: 
-	@vagrant suspend zk --force -g
+	@vagrant suspend zk 
 suspend_brokers: 
 	@for i in `seq 1 ${NUM_BROKERS}`; do BROKER_ID=$$i vagrant suspend broker$$i --force -g; done;
 suspend_all: suspend_brokers suspend_zookeeper
 
 # resume related targets
 resume_zookeeper: 
-	@vagrant resume zk --force -g
+	@vagrant resume zk 
 resume_brokers: 
 	@for i in `seq 1 ${NUM_BROKERS}`; do BROKER_ID=$$i vagrant resume broker$$i --force -g; done;
 resume_all: resume_brokers resume_zookeeper
@@ -48,7 +48,7 @@ destroy_all: destroy_brokers destroy_zookeeper
 
 # ssh targets
 ssh_zookeeper: 
-	@vagrant ssh zk --force -g
+	@vagrant ssh zk 
 ssh_broker/%: 
 	@BROKER_ID=$(@F) vagrant ssh broker$(@F)
 
