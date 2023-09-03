@@ -47,10 +47,12 @@ tee $IP.server.ssl.properties <<EOF
 listeners=PLAINTEXT://$IP:9092,SSL://$IP:9093
 advertised.listeners=PLAINTEXT://$IP:9092,SSL://$IP:9093
 ssl.keystore.location=/opt/kafka/ssl/kafka.server.keystore.jks
-ssl.keystore.password=serversecret
-ssl.key.password=serversecret
+ssl.keystore.password=$SRVPASS
+ssl.key.password=$SRVPASS
 ssl.truststore.location=/opt/kafka/ssl/kafka.server.truststore.jks
-ssl.truststore.password=serversecret
+ssl.truststore.password=$SRVPASS
+# to enable the mutual auth using ssl
+# ssl.client.auth=required
 EOF
 
 popd
