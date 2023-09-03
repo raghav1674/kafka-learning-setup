@@ -61,7 +61,7 @@ start_ui:
 	for i in `seq 1 ${NUM_BROKERS}`; do \
         broker_ips+="${BROKER_NETWORK}$$i:9092," ; \
     done && \
-	docker run -d --net host --rm -p 9000:9000 -e KAFKA_BROKERCONNECT=$$broker_ips --name kafdrop-ui obsidiandynamics/kafdrop 
+	docker run -d --rm -p 9000:9000 -e KAFKA_BROKERCONNECT=$$broker_ips --name kafdrop-ui obsidiandynamics/kafdrop 
 
 stop_ui:
 	docker rm -f kafdrop-ui
