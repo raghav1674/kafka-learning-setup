@@ -1,3 +1,4 @@
 .vagrant
 files/*.tar.gz
 ssl/
+theory/
