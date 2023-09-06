@@ -1,8 +1,8 @@
 {
   "__inputs": [
     {
-      "name": "DS_PROMETHEUS",
-      "label": "Prometheus",
+      "name": "DS_PROMETHEUS_KAFKA",
+      "label": "Prometheus Kafka",
       "description": "",
       "type": "datasource",
       "pluginId": "prometheus",
@@ -28,6 +28,12 @@
       "id": "prometheus",
       "name": "Prometheus",
       "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
     }
   ],
   "annotations": {
@@ -56,6 +62,270 @@
   "liveNow": false,
   "panels": [
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS_KAFKA}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 0
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS_KAFKA}"
+          },
+          "editorMode": "code",
+          "expr": "sum without(instance) (kafka_controller_KafkaController_Value{name=\"ActiveBrokerCount\"})",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "ActiveBrokerCount",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS_KAFKA}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 5,
+        "y": 0
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS_KAFKA}"
+          },
+          "editorMode": "code",
+          "expr": "sum without(instance) (kafka_controller_KafkaController_Value{name=\"ActiveControllerCount\"})",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "ActiveControllerCount",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS_KAFKA}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 11,
+        "y": 0
+      },
+      "id": 9,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS_KAFKA}"
+          },
+          "editorMode": "code",
+          "expr": "sum without(instance) (kafka_server_ReplicaManager_Value{name=\"UnderReplicatedPartitions\"})",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "UnderReplicatedPartitions",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS_KAFKA}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 7,
+        "x": 17,
+        "y": 0
+      },
+      "id": 10,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS_KAFKA}"
+          },
+          "editorMode": "code",
+          "expr": "sum without(instance) (kafka_server_ReplicaManager_Value{name=\"OfflineReplicaCount\"})",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "OfflineReplicaCount",
+      "type": "stat"
+    },
+    {
       "aliasColors": {
         "localhost:7071": "#629E51"
       },
@@ -64,7 +334,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "${DS_PROMETHEUS_KAFKA}"
       },
       "editable": true,
       "error": false,
@@ -75,7 +345,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 0
+        "y": 4
       },
       "hiddenSeries": false,
       "id": 1,
@@ -108,7 +378,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${DS_PROMETHEUS_KAFKA}"
           },
           "editorMode": "code",
           "expr": "rate(process_cpu_seconds_total{job=\"$job\"}[1m])",
@@ -161,7 +431,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "${DS_PROMETHEUS_KAFKA}"
       },
       "editable": true,
       "error": false,
@@ -172,7 +442,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 0
+        "y": 4
       },
       "hiddenSeries": false,
       "id": 2,
@@ -205,7 +475,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${DS_PROMETHEUS_KAFKA}"
           },
           "editorMode": "code",
           "expr": "sum without(area)(jvm_memory_bytes_used{job=\"$job\"})",
@@ -258,7 +528,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "${DS_PROMETHEUS_KAFKA}"
       },
       "editable": true,
       "error": false,
@@ -269,7 +539,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 0
+        "y": 4
       },
       "hiddenSeries": false,
       "id": 3,
@@ -302,7 +572,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${DS_PROMETHEUS_KAFKA}"
           },
           "editorMode": "code",
           "expr": "sum without(gc)(rate(jvm_gc_collection_seconds_sum{job=\"$job\"}[5m]))",
@@ -353,7 +623,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "${DS_PROMETHEUS_KAFKA}"
       },
       "editable": true,
       "error": false,
@@ -364,7 +634,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 7
+        "y": 11
       },
       "hiddenSeries": false,
       "id": 4,
@@ -397,7 +667,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${DS_PROMETHEUS_KAFKA}"
           },
           "editorMode": "code",
           "expr": "sum without(instance)(rate(kafka_server_BrokerTopicMetrics_Count{name=\"MessagesInPerSec\",topic!=\"\",job=\"$job\"}[5m]))",
@@ -448,7 +718,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "${DS_PROMETHEUS_KAFKA}"
       },
       "editable": true,
       "error": false,
@@ -459,7 +729,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 7
+        "y": 11
       },
       "hiddenSeries": false,
       "id": 5,
@@ -492,7 +762,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${DS_PROMETHEUS_KAFKA}"
           },
           "editorMode": "code",
           "expr": "sum without(instance)(rate(kafka_server_BrokerTopicMetrics_Count{name=\"BytesInPerSec\",topic!=\"\",job=\"$job\"}[5m]))",
@@ -543,7 +813,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "${DS_PROMETHEUS_KAFKA}"
       },
       "editable": true,
       "error": false,
@@ -554,7 +824,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 7
+        "y": 11
       },
       "hiddenSeries": false,
       "id": 6,
@@ -587,7 +857,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${DS_PROMETHEUS_KAFKA}"
           },
           "editorMode": "code",
           "expr": "sum without(instance)(rate(kafka_server_BrokerTopicMetrics_Count{name=\"BytesOutPerSec\",topic!=\"\",job=\"$job\"}[5m]))",
@@ -640,6 +910,10 @@
     "list": [
       {
         "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS_KAFKA}"
+        },
         "definition": "label_values(process_cpu_seconds_total{job!~\"prometheus\"},job)",
         "hide": 0,
         "includeAll": false,
@@ -691,6 +965,6 @@
   "timezone": "browser",
   "title": "Kafka Overview",
   "uid": "bf254dd7-35b4-4683-9233-a0cbf15fd4b4",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }

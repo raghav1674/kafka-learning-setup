@@ -1,10 +1,11 @@
 Vagrant.configure('2') do |config|
     config.vm.define "zk" do |zk|
-        zk.vm.box = "generic/rhel8"
+        zk.vm.box = "centos/7"
         zk.vm.hostname = "zk"
         zk.vm.network "private_network",ip: "#{ENV['ZOOKEEPER_IP']}"
         zk.vm.provision "file", source: './files/', destination: "/tmp/"
         zk.vm.provision "shell", inline: <<-SHELL
+            sudo echo 'ip_resolve=4' | tee -a  /etc/yum.conf
             sudo useradd zookeeper -d /opt/zookeeper
             sudo mkdir -p  /opt/zookeeper/{jre,logs,data}
             sudo tar -xzvf /tmp/files/#{ENV['JDK_DOWNLOAD_FILE_NAME']} --strip-components 1 -C /opt/zookeeper/jre
@@ -16,8 +17,6 @@ Vagrant.configure('2') do |config|
             sudo echo "clientPortAddress=#{ENV['ZOOKEEPER_IP']}" >> /opt/zookeeper/conf/zoo.cfg
             sudo chown -R zookeeper:zookeeper  /opt/zookeeper
             sudo su - zookeeper -c "/opt/zookeeper/bin/zkServer.sh --config /opt/zookeeper/conf start"
-            sudo firewall-cmd --add-port 2181/tcp --permanent 
-            sudo firewall-cmd --reload
       SHELL
         zk.vm.provider "virtualbox" do |v|
             v.memory = 1024
@@ -26,11 +25,12 @@ Vagrant.configure('2') do |config|
     end 
 
     config.vm.define "broker#{ENV['BROKER_ID']}" do |broker|
-        broker.vm.box = "generic/rhel8"
+        broker.vm.box = "centos/7"
         broker.vm.hostname = "broker#{ENV['BROKER_ID']}"
         broker.vm.network "private_network",ip: "#{ENV['BROKER_NETWORK']}#{ENV['BROKER_ID']}"
         broker.vm.provision "file", source: './files/', destination: "/tmp/"
         broker.vm.provision "shell", inline: <<-SHELL
+            sudo echo 'ip_resolve=4' | tee -a  /etc/yum.conf
             sudo useradd kafka -d /opt/kafka
             sudo mkdir -p  /opt/kafka/{jre,data}
             sudo tar -xzvf /tmp/files/#{ENV['JDK_DOWNLOAD_FILE_NAME']} --strip-components 1 -C /opt/kafka/jre
@@ -44,8 +44,6 @@ Vagrant.configure('2') do |config|
             sudo echo 'listeners=PLAINTEXT://#{ENV['BROKER_NETWORK']}#{ENV['BROKER_ID']}:9092' >> /opt/kafka/config/server.properties
             sudo chown -R kafka:kafka  /opt/kafka
             sudo su - kafka -c "/opt/kafka/bin/kafka-server-start.sh  -daemon /opt/kafka/config/server.properties"
-            sudo firewall-cmd --add-port 9092/tcp --add-port 9093/tcp  --permanent 
-            sudo firewall-cmd --reload
         SHELL
         broker.vm.provider "virtualbox" do |v|
             v.memory = 2048
