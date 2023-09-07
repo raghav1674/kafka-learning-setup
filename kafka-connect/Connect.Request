@@ -1,0 +1,29 @@
+
+# before running this make sure to create a file named as '/opt/kafka-connect/test-files/demo-file.txt' in all connect servers
+# and a topic named 'file-stream-demo-distributed'
+
+# To create a connector named 'file-stream-demo-distributed'
+curl -s -XPOST http://192.168.56.161:8084/connectors \
+-H 'Content-Type: application/json' \
+--data @sources/distributed/file.json
+
+# to list all the available connector plugins
+curl -s -XGET http://192.168.56.161:8084/connector-plugins
+
+# To list the active connectors 
+curl -s -XGET http://192.168.56.161:8084/connectors
+
+# to get the status of 'file-stream-demo-distributed' status
+curl -s -XGET http://192.168.56.161:8084/connectors/file-stream-demo-distributed/status
+
+# to get the tasks and config of 'file-stream-demo-distributed' connector
+curl -s -XGET http://192.168.56.161:8084/connectors/file-stream-demo-distributed/tasks
+
+# to pause the 'file-stream-demo-distributed' connector
+curl -s -XPUT http://192.168.56.161:8084/connectors/file-stream-demo-distributed/pause
+
+# to resume the 'file-stream-demo-distributed' connector
+curl -s -XPUT http://192.168.56.161:8084/connectors/file-stream-demo-distributed/resume
+
+# to delete the 'file-stream-demo-distributed' connector
+curl -s -X DELETE http://192.168.56.161:8084/connectors/file-stream-demo-distributed

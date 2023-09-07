@@ -1,0 +1,16 @@
+Vagrant.configure('2') do |config|
+    (1..2).each do |i|
+        config.vm.define "connect#{i}" do |connect|
+            connect.vm.box = "centos/7"
+            connect.vm.hostname = "connect#{i}"
+            connect.vm.network "private_network",ip: "#{ENV['CONNECT_NETWORK']}#{i}"
+            connect.vm.provision "file", source: '../files/', destination: "/tmp/"
+            connect.vm.provision "shell", path: "scripts/install.sh", args: "'192.168.56.131:9092' 'local-1' '#{ENV['CONNECT_NETWORK']}#{i}'"
+            connect.vm.provider "virtualbox" do |v|
+                v.memory = 2048
+                v.cpus = 2
+            end
+        end 
+    end
+end
+

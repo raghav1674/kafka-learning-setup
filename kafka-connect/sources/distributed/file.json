@@ -1,0 +1,9 @@
+{
+    "name": "file-stream-demo-distributed",
+    "config": {
+        "connector.class": "org.apache.kafka.connect.file.FileStreamSourceConnector",
+        "tasks.max": "1",
+        "file": "/opt/kafka-connect/test-files/demo-file.txt",
+        "topic": "demo-file-source-distributed"
+    }
+}
